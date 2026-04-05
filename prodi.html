@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Program Studi FST UPITRA — S1 Sistem Informasi, S1 Informatika, S1 Rekayasa Perangkat Lunak (Software Engineering). Kurikulum, kompetensi, dan prospek karir lengkap." />
+  <title>Program Studi — FST UPITRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fst-style.css" />
+
+  <style>
+    /* =============================================
+       PRODI PAGE — SPECIFIC STYLES
+    ============================================= */
+
+    /* Tab navigation */
+    .prodi-tabs-wrap {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 50;
+      background: rgba(5,5,10,0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .prodi-tabs {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      padding: 0 1.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .prodi-tabs::-webkit-scrollbar { display: none; }
+    .prodi-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--white-ghost);
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .prodi-tab:hover { color: var(--white-dim); }
+    .prodi-tab.active { color: var(--blue-light); border-bottom-color: var(--blue-accent); }
+    .prodi-tab-icon { font-size: 1rem; }
+
+    /* Prodi hero section */
+    .prodi-section {
+      padding: 5rem 1.5rem;
+      position: relative;
+    }
+    .prodi-section:nth-child(even) { background: var(--navy); }
+    .prodi-section:nth-child(odd)  { background: var(--black); }
+
+    .prodi-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 3.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .prodi-hero-icon {
+      width: 80px; height: 80px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--blue-accent), var(--navy-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      border: 1px solid rgba(37,99,235,0.4);
+      box-shadow: 0 0 32px rgba(37,99,235,0.25);
+      flex-shrink: 0;
+    }
+    .prodi-header-meta { }
+    .prodi-id-label { font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-light); font-weight: 700; margin-bottom: 0.5rem; }
+    .prodi-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .prodi-h2 em { font-style: normal; color: var(--blue-light); }
+    .prodi-meta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
+    .prodi-meta-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--white-mute); }
+    .prodi-meta-item strong { color: var(--white-dim); }
+
+    /* Detail grid layout */
+    .prodi-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Content cards */
+    .content-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+    .content-card-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .content-card-title::before { content:''; display:block; width:14px; height:2px; background:var(--blue-accent); border-radius:2px; }
+
+    /* Skill chips */
+    .skill-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-chip {
+      padding: 0.38rem 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      border-radius: 8px;
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.2);
+      color: var(--blue-light);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .skill-chip:hover { background: rgba(37,99,235,0.18); border-color: var(--blue-accent); }
+
+    /* Career list */
+    .career-list { display: flex; flex-direction: column; gap: 0.65rem; }
+    .career-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .career-item:hover { border-color: var(--blue-accent); background: rgba(37,99,235,0.07); }
+    .career-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue-accent); flex-shrink: 0; }
+    .career-name { font-size: 0.82rem; font-weight: 500; color: var(--white-dim); }
+
+    /* Semester table */
+    .semester-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.2rem; }
+    .semester-block { }
+    .semester-label { font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid rgba(37,99,235,0.2); }
+    .semester-matkul { display: flex; flex-direction: column; gap: 0.38rem; }
+    .matkul-item { font-size: 0.78rem; color: var(--white-mute); padding: 0.3rem 0.6rem; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid rgba(37,99,235,0.3); }
+
+    /* Comparison table */
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
+    .compare-table th { padding: 0.9rem 1.2rem; font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(37,99,235,0.1); color: var(--blue-light); text-align: left; border-bottom: 1px solid var(--glass-border); }
+    .compare-table td { padding: 0.85rem 1.2rem; font-size: 0.82rem; color: var(--white-mute); border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
+    .compare-table tr:hover td { background: rgba(37,99,235,0.04); }
+    .compare-table td:first-child { color: var(--white-dim); font-weight: 500; }
+    .ct-icon { font-size: 1.1rem; }
+    .compare-wrap { overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 14px; overflow: hidden; }
+
+    /* CTA band */
+    .cta-band {
+      background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .cta-band h3 { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: var(--white); margin-bottom: 0.75rem; }
+    .cta-band p { color: var(--white-mute); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.75rem; line-height: 1.75; }
+    .cta-band-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* =============================================
+       PRODI PAGE RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .prodi-detail-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .prodi-section { padding: 3.5rem 1rem; }
+      .prodi-header { grid-template-columns: 1fr; gap: 1.25rem; }
+      .prodi-hero-icon { width: 64px; height: 64px; font-size: 1.75rem; border-radius: 15px; }
+      .semester-grid { grid-template-columns: 1fr; }
+      .cta-band { padding: 1.75rem 1.25rem; }
+      .cta-band-actions { flex-direction: column; align-items: stretch; }
+      .cta-band-actions .btn-primary,
+      .cta-band-actions .btn-ghost { text-align: center; justify-content: center; }
+      .compare-table th, .compare-table td { padding: 0.65rem 0.9rem; font-size: 0.76rem; }
+      .prodi-tabs { padding: 0 1rem; }
+      .prodi-tab { padding: 0.85rem 1rem; font-size: 0.74rem; }
+    }
+    @media (max-width: 480px) {
+      .prodi-meta-row { gap: 0.5rem; }
+      .prodi-h2 { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="FST UPITRA Beranda">
+          <div class="nav-logo-badge" aria-hidden="true">FST</div>
+          <div class="nav-logo-text"><strong>UPITRA</strong><span>Sains &amp; Teknologi</span></div>
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Beranda</a></li>
+          <li>
+            <a href="prodi.html" class="active">Program Studi
+              <svg class="chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5 5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <ul class="dropdown">
+              <li><a href="#si">S1 Sistem Informasi</a></li>
+              <li><a href="#inf">S1 Informatika</a></li>
+              <li><a href="#rpl">S1 Software Engineering</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#news">Berita &amp; Agenda</a></li>
+          <li><a href="index.html#fasilitas">Fasilitas</a></li>
+          <li><a href="pendaftaran.html">Pendaftaran</a></li>
+          <li><a href="index.html#kontak">Kontak</a></li>
+          <li><a href="pendaftaran.html" class="nav-cta">Daftar Sekarang</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <p class="mob-section-title">Halaman</p>
+      <a href="index.html">Beranda</a>
+      <a href="index.html#news">Berita &amp; Agenda</a>
+      <a href="index.html#fasilitas">Fasilitas</a>
+      <a href="pendaftaran.html">Pendaftaran</a>
+      <a href="index.html#kontak">Kontak</a>
+      <p class="mob-section-title">Program Studi</p>
+      <a href="#si" onclick="closeMobile()">S1 Sistem Informasi</a>
+      <a href="#inf" onclick="closeMobile()">S1 Informatika</a>
+      <a href="#rpl" onclick="closeMobile()">S1 Software Engineering</a>
+      <a href="pendaftaran.html" class="mob-cta">Daftar Sekarang →</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-grid" aria-hidden="true"></div>
+    <div class="page-hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Beranda</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Program Studi</span>
+      </nav>
+      <h1><em>Program Studi</em><br />Fakultas Sains &amp; Teknologi</h1>
+      <p>Tiga program sarjana dirancang selaras dengan kebutuhan industri teknologi masa kini — dari rekayasa sistem, ilmu komputer, hingga pengembangan perangkat lunak profesional.</p>
+    </div>
+  </div>
+
+  <!-- STICKY TABS -->
+  <div class="prodi-tabs-wrap" role="navigation" aria-label="Program studi tabs">
+    <div class="prodi-tabs">
+      <a href="#si"  class="prodi-tab active" data-target="si"><span class="prodi-tab-icon">💻</span> Sistem Informasi</a>
+      <a href="#inf" class="prodi-tab" data-target="inf"><span class="prodi-tab-icon">⚙️</span> Informatika</a>
+      <a href="#rpl" class="prodi-tab" data-target="rpl"><span class="prodi-tab-icon">🛠</span> Software Engineering</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============ S1 SISTEM INFORMASI ============ -->
+    <section id="si" class="prodi-section">
+      <div class="container">
+  <div class="prodi-header reveal">
+    <div class="prodi-hero-icon" aria-hidden="true">
+      <i class="fa-solid fa-laptop-code"></i>
+    </div>
+    
+    <div class="prodi-header-meta">
+      <div class="prodi-id-label">Program Studi 01 · FST UPITRA</div>
+      <h2 class="prodi-h2">S1 <em>Sistem Informasi</em></h2>
+      
+      <div class="prodi-meta-row">
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-graduation-cap"></i> <strong>Jenjang:</strong> Sarjana (S-1)
+        </div>
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-calendar-check"></i> <strong>Masa Studi:</strong> 4 Tahun (8 Semester)
+        </div>
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-location-dot"></i> <strong>Kampus:</strong> Surakarta
+        </div>
+        <span class="badge badge-green">
+          <i class="fa-solid fa-circle-check" style="font-size: 0.7rem; margin-right: 4px;"></i> Aktif
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div class="prodi-detail-grid">
+          <div class="reveal">
+            <div class="content-card">
+              <div class="content-card-title">Deskripsi Program</div>
+              <p style="font-size:0.88rem;color:var(--white-mute);line-height:1.8;margin-bottom:1.2rem;">Program Studi S1 Sistem Informasi membekali mahasiswa kemampuan menganalisis, merancang, mengimplementasikan, dan mengelola sistem informasi berbasis komputer untuk mendukung proses bisnis dan pengambilan keputusan organisasi.</p>
+              <p style="font-size:0.88rem;color:var(--white-mute);line-height:1.8;">Kurikulum dirancang dengan konsep <em>link &amp; match</em> bersama Triputra Group dan mitra industri, memastikan relevansi langsung dengan kebutuhan dunia kerja.</p>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:0.1s;">
+            <div class="content-card">
+              <div class="content-card-title">Kompetensi Utama</div>
+              <div class="skill-grid">
+                <span class="skill-chip">Analisis Sistem</span>
+                <span class="skill-chip">Database Management</span>
+                <span class="skill-chip">Enterprise Architecture</span>
+                <span class="skill-chip">Business Intelligence</span>
+                <span class="skill-chip">Project Management</span>
+                <span class="skill-chip">IT Governance</span>
+                <span class="skill-chip">ERP Systems</span>
+                <span class="skill-chip">Data Analytics</span>
+                <span class="skill-chip">Cloud Computing</span>
+                <span class="skill-chip">IT Audit</span>
+                <span class="skill-chip">Cyber Security Dasar</span>
+                <span class="skill-chip">UI/UX Research</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prodi-detail-grid">
+          <div class="reveal">
+            <div class="content-card">
+              <div class="content-card-title">Prospek Karir</div>
+              <div class="career-list">
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">System Analyst & IT Consultant</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Database Administrator</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Project Manager IT</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Business Intelligence Analyst</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">IT Auditor & Governance Specialist</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Digital Transformation Lead</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Technopreneur / Startup Founder</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:0.1s;">
+            <div class="content-card">
+              <div class="content-card-title">Gambaran Kurikulum</div>
+              <div class="semester-grid">
+                <div class="semester-block">
+                  <div class="semester-label">Semester 1–2</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Pengantar Sistem Informasi</div>
+                    <div class="matkul-item">Matematika Diskrit</div>
+                    <div class="matkul-item">Dasar Pemrograman</div>
+                    <div class="matkul-item">Basis Data Dasar</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 3–4</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Analisis & Desain SI</div>
+                    <div class="matkul-item">Pemrograman Web</div>
+                    <div class="matkul-item">Manajemen Proyek IT</div>
+                    <div class="matkul-item">Jaringan Komputer</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 5–6</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Enterprise Resource Planning</div>
+                    <div class="matkul-item">Business Intelligence</div>
+                    <div class="matkul-item">IT Governance</div>
+                    <div class="matkul-item">Keamanan Informasi</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 7–8</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Magang Industri</div>
+                    <div class="matkul-item">Capstone Project</div>
+                    <div class="matkul-item">Skripsi / TA</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S1 INFORMATIKA ============ -->
+    <section id="inf" class="prodi-section">
+  <div class="container">
+  <div class="prodi-header reveal">
+    <div class="prodi-hero-icon" aria-hidden="true">
+      <i class="fa-solid fa-microchip"></i>
+    </div>
+    
+    <div class="prodi-header-meta">
+      <div class="prodi-id-label">Program Studi 02 · FST UPITRA</div>
+      <h2 class="prodi-h2">S1 <em>Informatika</em></h2>
+      
+      <div class="prodi-meta-row">
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-graduation-cap"></i> <strong>Jenjang:</strong> Sarjana (S-1)
+        </div>
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-calendar-days"></i> <strong>Masa Studi:</strong> 4 Tahun (8 Semester)
+        </div>
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-location-dot"></i> <strong>Kampus:</strong> Surakarta
+        </div>
+        <span class="badge badge-green">
+          <i class="fa-solid fa-circle-check"></i> Aktif
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div class="prodi-detail-grid">
+          <div class="reveal">
+            <div class="content-card">
+              <div class="content-card-title">Deskripsi Program</div>
+              <p style="font-size:0.88rem;color:var(--white-mute);line-height:1.8;margin-bottom:1.2rem;">Program S1 Informatika berfokus pada fondasi teoritis ilmu komputer yang kuat: algoritma, struktur data, kecerdasan buatan (AI), machine learning, grafika komputer, dan pengembangan game/multimedia.</p>
+              <p style="font-size:0.88rem;color:var(--white-mute);line-height:1.8;">Mahasiswa diarahkan untuk menjadi inovator berbasis riset yang mampu mengembangkan solusi teknologi orisinal dengan pendekatan ilmiah.</p>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:0.1s;">
+            <div class="content-card">
+              <div class="content-card-title">Kompetensi Utama</div>
+              <div class="skill-grid">
+                <span class="skill-chip">Algoritma &amp; Struktur Data</span>
+                <span class="skill-chip">Artificial Intelligence</span>
+                <span class="skill-chip">Machine Learning</span>
+                <span class="skill-chip">Computer Vision</span>
+                <span class="skill-chip">Natural Language Processing</span>
+                <span class="skill-chip">Game Development</span>
+                <span class="skill-chip">Computer Graphics</span>
+                <span class="skill-chip">Parallel Computing</span>
+                <span class="skill-chip">Operating Systems</span>
+                <span class="skill-chip">Compiler Design</span>
+                <span class="skill-chip">VR / AR Development</span>
+                <span class="skill-chip">Research Methodology</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prodi-detail-grid">
+          <div class="reveal">
+            <div class="content-card">
+              <div class="content-card-title">Prospek Karir</div>
+              <div class="career-list">
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">AI / Machine Learning Engineer</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Game & Multimedia Developer</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Computer Vision Researcher</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Data Scientist</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">VR/AR Application Developer</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">IT Trainer &amp; Educator</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Akademisi &amp; Peneliti</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:0.1s;">
+            <div class="content-card">
+              <div class="content-card-title">Gambaran Kurikulum</div>
+              <div class="semester-grid">
+                <div class="semester-block">
+                  <div class="semester-label">Semester 1–2</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Algoritma &amp; Pemrograman</div>
+                    <div class="matkul-item">Matematika Komputasi</div>
+                    <div class="matkul-item">Struktur Data</div>
+                    <div class="matkul-item">Logika Informatika</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 3–4</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Kecerdasan Buatan</div>
+                    <div class="matkul-item">Grafika Komputer</div>
+                    <div class="matkul-item">Sistem Operasi</div>
+                    <div class="matkul-item">Pemrograman Berorientasi Objek</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 5–6</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Machine Learning</div>
+                    <div class="matkul-item">Computer Vision</div>
+                    <div class="matkul-item">Pengembangan Game</div>
+                    <div class="matkul-item">Big Data Analytics</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 7–8</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Magang Riset / Industri</div>
+                    <div class="matkul-item">Capstone AI Project</div>
+                    <div class="matkul-item">Skripsi / TA</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S1 SOFTWARE ENGINEERING ============ -->
+    <section id="rpl" class="prodi-section">
+     <div class="container">
+  <div class="prodi-header reveal">
+    <div class="prodi-hero-icon" aria-hidden="true">
+      <i class="fa-solid fa-code-pull-request"></i>
+    </div>
+    
+    <div class="prodi-header-meta">
+      <div class="prodi-id-label">Program Studi 03 · FST UPITRA</div>
+      <h2 class="prodi-h2">S1 <em>Software Engineering</em></h2>
+      
+      <div class="prodi-meta-row">
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-graduation-cap"></i> <strong>Jenjang:</strong> Sarjana (S-1)
+        </div>
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-calendar-check"></i> <strong>Masa Studi:</strong> 4 Tahun (8 Semester)
+        </div>
+        <div class="prodi-meta-item">
+          <i class="fa-solid fa-location-dot"></i> <strong>Kampus:</strong> Surakarta
+        </div>
+        <span class="badge badge-green">
+          <i class="fa-solid fa-circle-check"></i> Aktif
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div class="prodi-detail-grid">
+          <div class="reveal">
+            <div class="content-card">
+              <div class="content-card-title">Deskripsi Program</div>
+              <p style="font-size:0.88rem;color:var(--white-mute);line-height:1.8;margin-bottom:1.2rem;">Program S1 Rekayasa Perangkat Lunak (Software Engineering) berfokus pada perancangan, pengembangan, pengujian, dan pemeliharaan perangkat lunak berkualitas tinggi menggunakan metodologi modern.</p>
+              <p style="font-size:0.88rem;color:var(--white-mute);line-height:1.8;">Mahasiswa dilatih dengan Agile, Scrum, DevOps, dan praktik industri internasional — siap langsung berkontribusi di tim pengembangan profesional.</p>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:0.1s;">
+            <div class="content-card">
+              <div class="content-card-title">Kompetensi Utama</div>
+              <div class="skill-grid">
+                <span class="skill-chip">Full-Stack Web Development</span>
+                <span class="skill-chip">Mobile App Development</span>
+                <span class="skill-chip">Software Testing &amp; QA</span>
+                <span class="skill-chip">Agile / Scrum</span>
+                <span class="skill-chip">DevOps &amp; CI/CD</span>
+                <span class="skill-chip">Microservices Architecture</span>
+                <span class="skill-chip">API Design (REST / GraphQL)</span>
+                <span class="skill-chip">Cloud Deployment</span>
+                <span class="skill-chip">Version Control (Git)</span>
+                <span class="skill-chip">Software Architecture</span>
+                <span class="skill-chip">Clean Code Principles</span>
+                <span class="skill-chip">UI/UX Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prodi-detail-grid">
+          <div class="reveal">
+            <div class="content-card">
+              <div class="content-card-title">Prospek Karir</div>
+              <div class="career-list">
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Web &amp; Mobile Developer</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Software Quality Assurance (QA)</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">DevOps &amp; Cloud Engineer</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Software Architect</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Product Engineer / Tech Lead</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Technopreneur / Startup CTO</div></div>
+                <div class="career-item"><div class="career-dot"></div><div class="career-name">Perbankan &amp; Fintech Developer</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:0.1s;">
+            <div class="content-card">
+              <div class="content-card-title">Gambaran Kurikulum</div>
+              <div class="semester-grid">
+                <div class="semester-block">
+                  <div class="semester-label">Semester 1–2</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Dasar Rekayasa Perangkat Lunak</div>
+                    <div class="matkul-item">Pemrograman Dasar</div>
+                    <div class="matkul-item">Basis Data</div>
+                    <div class="matkul-item">Matematika untuk RPL</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 3–4</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Pemrograman Web &amp; Mobile</div>
+                    <div class="matkul-item">Rekayasa Kebutuhan</div>
+                    <div class="matkul-item">Pengujian Perangkat Lunak</div>
+                    <div class="matkul-item">Desain Berorientasi Objek</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 5–6</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Arsitektur Perangkat Lunak</div>
+                    <div class="matkul-item">DevOps &amp; CI/CD</div>
+                    <div class="matkul-item">Agile Development</div>
+                    <div class="matkul-item">Cloud Computing</div>
+                  </div>
+                </div>
+                <div class="semester-block">
+                  <div class="semester-label">Semester 7–8</div>
+                  <div class="semester-matkul">
+                    <div class="matkul-item">Magang Industri</div>
+                    <div class="matkul-item">Capstone Software Project</div>
+                    <div class="matkul-item">Skripsi / TA</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <!-- <section style="background:var(--navy);padding:4rem 1.5rem;">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-label">Perbandingan</span>
+          <h2 class="section-h2">Ringkasan <em>Ketiga Prodi</em></h2>
+          <p class="section-desc">Temukan program yang paling sesuai dengan minat dan tujuan karir Anda.</p>
+        </div>
+        <div class="compare-wrap reveal" style="margin-top:2rem;">
+          <table class="compare-table" role="table" aria-label="Perbandingan program studi">
+            <thead>
+              <tr>
+                <th>Aspek</th>
+                <th><span class="ct-icon">💻</span> Sistem Informasi</th>
+                <th><span class="ct-icon">⚙️</span> Informatika</th>
+                <th><span class="ct-icon">🛠</span> Software Engineering</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Fokus Utama</td><td>Bisnis &amp; sistem organisasi</td><td>Teori &amp; inovasi komputasi</td><td>Rekayasa &amp; kualitas software</td></tr>
+              <tr><td>Orientasi</td><td>Manajerial &amp; analitis</td><td>Riset &amp; inovatif</td><td>Praktis &amp; industri</td></tr>
+              <tr><td>Kekuatan</td><td>ERP, BI, IT Governance</td><td>AI, ML, Game Dev</td><td>Full-Stack, DevOps, Agile</td></tr>
+              <tr><td>Karir Utama</td><td>System Analyst, IT Manager</td><td>AI Engineer, Data Scientist</td><td>Developer, QA, DevOps</td></tr>
+              <tr><td>Cocok Untuk</td><td>Suka bisnis &amp; manajemen</td><td>Suka riset &amp; algoritma</td><td>Suka coding &amp; membangun produk</td></tr>
+              <tr><td>Beban Coding</td><td><span class="badge badge-orange">Sedang</span></td><td><span class="badge badge-blue">Tinggi</span></td><td><span class="badge badge-blue">Sangat Tinggi</span></td></tr>
+            </tbody>
+          </table>
+        </div> -->
+
+        <!-- CTA Band -->
+        <!-- <div class="cta-band reveal">
+          <h3>Siap Bergabung di FST UPITRA?</h3>
+          <p>Jadilah bagian dari generasi inovator teknologi berikutnya. Proses pendaftaran mudah — cukup siapkan identitas, ijazah, dan foto.</p>
+          <div class="cta-band-actions">
+            <a href="pendaftaran.html" class="btn-primary">
+              Daftar Sekarang
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="index.html#kontak" class="btn-ghost">Tanya Admisi</a>
+          </div>
+        </div>
+      </div>
+    </section> -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-logo-badge">FST</div><div class="nav-logo-text"><strong>UPITRA</strong><span>Sains &amp; Teknologi</span></div></div>
+        <p>Fakultas Sains &amp; Teknologi Universitas Pignatelli Triputra — mencetak inovator teknologi berdampak nyata melalui pendidikan transformatif.</p>
+      </div>
+      <div><div class="footer-col-title">Program Studi</div><nav class="footer-links"><a href="#si">S1 Sistem Informasi</a><a href="#inf">S1 Informatika</a><a href="#rpl">S1 Software Engineering</a></nav></div>
+      <div><div class="footer-col-title">Support System</div><nav class="footer-links"><a href="https://mhs.upitra.ac.id/" target="_blank" rel="noopener">SIAKAD</a><a href="https://unity.upitra.ac.id/" target="_blank" rel="noopener">LMS-Unity</a><a href="https://siper.upitra.ac.id/" target="_blank" rel="noopener">Library</a><a href="https://jurnal.upitra.ac.id/" target="_blank" rel="noopener">E-Journal</a><a href="https://ucc.upitra.ac.id/" target="_blank" rel="noopener">Career Center</a></nav></div>
+      <div><div class="footer-col-title">Tautan</div><nav class="footer-links"><a href="index.html">Beranda</a><a href="pendaftaran.html">Pendaftaran</a><a href="https://www.upitra.ac.id/biaya-kuliah" target="_blank" rel="noopener">Beasiswa</a><a href="index.html#kontak">Kontak</a><a href="https://www.upitra.ac.id/" target="_blank" rel="noopener">Website Utama</a></nav></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 FST UPITRA · <a href="https://www.upitra.ac.id/" target="_blank">Universitas Pignatelli Triputra</a> · Surakarta.</p>
+      <div class="footer-badges"><span class="footer-badge">SK 3884/2022</span><span class="footer-badge">3 Prodi S1</span><span class="footer-badge">Triputra Group</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('active', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    function closeMobile() { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow = ''; }
+    document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobile(); });
+
+    // Scroll reveal
+    const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => ro.observe(el));
+
+    // Tab active state on scroll
+    const sections = { si: document.getElementById('si'), inf: document.getElementById('inf'), rpl: document.getElementById('rpl') };
+    const tabs = document.querySelectorAll('.prodi-tab');
+    const tabHeight = document.querySelector('.prodi-tabs-wrap').offsetHeight + 68;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY + tabHeight + 40;
+      let active = 'si';
+      if (sections.inf && y >= sections.inf.offsetTop) active = 'inf';
+      if (sections.rpl && y >= sections.rpl.offsetTop) active = 'rpl';
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.target === active));
+    }, { passive: true });
+
+    // Smooth scroll with offset
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); const off = 68 + document.querySelector('.prodi-tabs-wrap').offsetHeight + 16; window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - off, behavior: 'smooth' }); closeMobile(); }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fakultas Sains dan Teknologi Universitas Pignatelli Triputra (FST UPITRA) — Unggul, Inovatif, Berdampak. Program Studi Sistem Informasi, Informatika, dan Rekayasa Perangkat Lunak." />
+  <meta name="keywords" content="FST UPITRA, Fakultas Sains Teknologi, Informatika, Sistem Informasi, Rekayasa Perangkat Lunak, UPITRA, Surakarta" />
+  <title>FST UPITRA — Beranda | Fakultas Sains &amp; Teknologi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fst-style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://jsdelivr" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+  <style>
+   html{
+    overflow-x: hidden;
+   }
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: calc(var(--nav-h) + 2.5rem) 1.5rem 4rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 65% 35%, rgba(26,58,107,0.55) 0%, transparent 65%),
+        linear-gradient(180deg, var(--black-deep) 0%, var(--navy) 50%, var(--black) 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black, transparent);
+      pointer-events: none;
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.2;
+      animation: orb-float 9s ease-in-out infinite alternate;
+    }
+    .hero-orb-1 { width: 500px; height: 500px; background: var(--blue-accent); top: -80px; right: -80px; }
+    .hero-orb-2 { width: 360px; height: 360px; background: var(--navy-light); bottom: -40px; left: -40px; animation-delay: 3s; }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto; width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.32rem 0.85rem;
+      background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 999px;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--blue-light); margin-bottom: 1.25rem;
+      animation: fade-in 0.8s var(--ease-out) 0.15s both;
+    }
+    .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-glow); animation: pulse-dot 2s infinite; }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 800; line-height: 1.06; letter-spacing: -0.025em;
+      margin-bottom: 1.25rem;
+      animation: fade-in 0.9s var(--ease-out) 0.3s both;
+    }
+    .hero-h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-glow), var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .hero-p {
+      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+      color: var(--white-mute); max-width: 480px; margin-bottom: 2rem; line-height: 1.78;
+      animation: fade-in 1s var(--ease-out) 0.45s both;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; animation: fade-in 1s var(--ease-out) 0.6s both; }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      margin-top: 2.5rem; padding-top: 1.75rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      animation: fade-in 1s var(--ease-out) 0.75s both;
+    }
+    .stat-item { text-align: left; }
+    .stat-num { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; color: var(--white); display: block; line-height: 1; }
+    .stat-label { font-size: 0.68rem; color: var(--white-ghost); letter-spacing: 0.07em; text-transform: uppercase; margin-top: 0.2rem; }
+
+    /* Hero right card */
+    .hero-visual {
+      position: relative; display: flex; justify-content: center; align-items: center;
+      animation: fade-in 1s var(--ease-out) 0.35s both;
+    }
+    .hero-big-card {
+      background: rgba(10,22,40,0.88); border: 1px solid var(--glass-border);
+      border-radius: 18px; padding: 1.75rem; backdrop-filter: blur(16px);
+      width: 100%; max-width: 340px;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .hbc-top { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.3rem; }
+    .hbc-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--blue-accent), var(--navy-light)); border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .hbc-meta { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--white-ghost); }
+    .hbc-meta strong { display: block; font-family: var(--font-display); font-size: 0.88rem; color: var(--white); text-transform: none; letter-spacing: 0; font-weight: 700; }
+    .hbc-prodi-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .hbc-prodi {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 0.9rem;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .hbc-prodi:hover { border-color: var(--blue-accent); background: rgba(37,99,235,0.08); }
+    .hbc-prodi-name { font-size: 0.8rem; font-weight: 500; color: var(--white-dim); }
+    .hbc-prodi-badge { font-size: 0.6rem; padding: 0.18rem 0.48rem; border-radius: 999px; background: rgba(37,99,235,0.15); color: var(--blue-light); font-weight: 600; border: 1px solid rgba(37,99,235,0.25); }
+    .float-card {
+      position: absolute;
+      background: rgba(8,16,36,0.95); border: 1px solid var(--glass-border); border-radius: 11px;
+      padding: 0.7rem 0.9rem; backdrop-filter: blur(12px); font-size: 0.72rem; white-space: nowrap;
+    }
+    .float-card-1 { top: -16px; right: -36px; animation: float-1 4s ease-in-out infinite; }
+    .float-card-2 { bottom: 16px; left: -44px; animation: float-2 5s ease-in-out infinite; }
+    @keyframes float-1 { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+    @keyframes float-2 { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(7px); } }
+    .fc-val { font-family: var(--font-display); font-size: 1rem; font-weight: 800; color: var(--blue-light); }
+    .fc-lbl { color: var(--white-ghost); font-size: 0.62rem; margin-top: 0.1rem; }
+
+    /* ABOUT */
+    #about { background: var(--navy); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: center; }
+    .about-dekan {
+      display: flex; align-items: center; gap: 1.1rem;
+      padding: 1.1rem 1.4rem;
+      background: rgba(37,99,235,0.07); border: 1px solid rgba(37,99,235,0.2); border-radius: 14px;
+      margin-top: 1.75rem;
+    }
+    .dekan-photo { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-accent), var(--navy-mid)); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; border: 2px solid var(--blue-accent); }
+    .dekan-name { font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--white); }
+    .dekan-title { font-size: 0.68rem; color: var(--blue-light); }
+    .dekan-contact { font-size: 0.68rem; color: var(--white-ghost); margin-top: 0.15rem; }
+    .about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 1.75rem; }
+    .pillar-card { padding: 1.1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; transition: border-color 0.3s, background 0.3s; }
+    .pillar-card:hover { border-color: var(--blue-accent); background: rgba(37,99,235,0.06); }
+    .pillar-icon { font-size: 1.4rem; margin-bottom: 0.45rem; }
+    .pillar-title { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+    .pillar-desc { font-size: 0.7rem; color: var(--white-ghost); line-height: 1.6; }
+
+    /* PRODI CARDS */
+    #prodi { background: var(--black); }
+    .prodi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 2.75rem; }
+    .prodi-card {
+      position: relative; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px; padding: 1.75rem; overflow: hidden;
+      transition: transform 0.32s var(--ease-out), border-color 0.32s, box-shadow 0.32s;
+      cursor: pointer;
+    }
+    .prodi-card::before { content:''; position:absolute; inset:0; background: linear-gradient(135deg, rgba(37,99,235,0.12), transparent 60%); opacity:0; transition: opacity 0.32s; }
+    .prodi-card:hover { transform: translateY(-6px); border-color: var(--blue-accent); box-shadow: 0 22px 60px rgba(37,99,235,0.18); }
+    .prodi-card:hover::before { opacity: 1; }
+    .prodi-number { font-family: var(--font-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; color: var(--blue-accent); text-transform: uppercase; margin-bottom: 0.9rem; }
+    .prodi-icon-wrap { width: 52px; height: 52px; border-radius: 13px; border: 1px solid rgba(37,99,235,0.3); background: rgba(37,99,235,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.3rem; transition: background 0.3s, transform 0.3s; }
+    .prodi-card:hover .prodi-icon-wrap { background: rgba(37,99,235,0.18); transform: scale(1.05); }
+    .prodi-degree { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-ghost); font-weight: 600; margin-bottom: 0.35rem; }
+    .prodi-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 0.9rem; }
+    .prodi-desc { font-size: 0.8rem; color: var(--white-mute); line-height: 1.72; margin-bottom: 1.3rem; }
+    .prodi-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.3rem; }
+    .prodi-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; font-weight: 600; color: var(--blue-light); transition: gap 0.2s; }
+    .prodi-link:hover { gap: 0.65rem; }
+
+    /* VISI MISI */
+    #visi { background: var(--navy); }
+    .vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; margin-top: 2.75rem; }
+    .vm-card { padding: 1.75rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 15px; position: relative; overflow: hidden; }
+    .vm-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--blue-accent), var(--sky)); border-radius: 3px 3px 0 0; }
+    .vm-label { font-family: var(--font-display); font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); font-weight: 700; margin-bottom: 0.7rem; }
+    .vm-text { font-size: 0.88rem; color: var(--white-mute); line-height: 1.8; }
+    .vm-list { padding-left: 1.1rem; list-style: disc; display: flex; flex-direction: column; gap: 0.55rem; }
+    .vm-list li { font-size: 0.83rem; color: var(--white-mute); line-height: 1.65; }
+    .vm-list li::marker { color: var(--blue-accent); }
+
+    /* NEWS */
+    #news { background: var(--black); }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 2.75rem; }
+    .news-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07); border-radius: 15px; overflow: hidden; transition: transform 0.3s var(--ease-out), border-color 0.3s, box-shadow 0.3s; }
+    .news-card:hover { transform: translateY(-4px); border-color: rgba(37,99,235,0.4); box-shadow: 0 14px 44px rgba(0,0,0,0.38); }
+    .news-thumb { width: 100%; height: 168px; background: linear-gradient(135deg, var(--navy), var(--blue)); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; position: relative; overflow: hidden; }
+    .news-thumb-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(5,5,8,0.7) 0%, transparent 60%); }
+    .news-thumb .t-icon { position: relative; z-index: 1; }
+    .news-cat { position: absolute; bottom: 0.65rem; left: 0.65rem; font-size: 0.6rem; padding: 0.18rem 0.55rem; border-radius: 999px; background: var(--blue-accent); color: var(--white); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; z-index: 2; }
+    .news-body { padding: 1.2rem; }
+    .news-date { font-size: 0.68rem; color: var(--white-ghost); margin-bottom: 0.45rem; }
+    .news-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); line-height: 1.42; margin-bottom: 0.65rem; }
+    .news-excerpt { font-size: 0.76rem; color: var(--white-mute); line-height: 1.72; }
+
+    .agenda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; margin-top: 1.75rem; }
+    .agenda-card { display: flex; gap: 0.9rem; align-items: flex-start; padding: 1.1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; transition: border-color 0.2s; }
+    .agenda-card:hover { border-color: var(--blue-accent); }
+    .agenda-date-box { flex-shrink: 0; width: 44px; text-align: center; background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.25); border-radius: 9px; padding: 0.45rem 0.2rem; }
+    .agenda-day { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--blue-light); line-height: 1; display: block; }
+    .agenda-month { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--white-ghost); display: block; margin-top: 0.12rem; }
+    .agenda-title { font-family: var(--font-display); font-size: 0.83rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; line-height: 1.35; }
+    .agenda-meta { font-size: 0.68rem; color: var(--white-ghost); }
+
+    /* FASILITAS */
+    #fasilitas { background: var(--navy); }
+    .fasilitas-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; margin-top: 2.75rem; }
+    .fas-card { padding: 1.6rem 1.2rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 13px; text-align: center; transition: transform 0.3s, border-color 0.3s, background 0.3s; }
+    .fas-card:hover { transform: translateY(-4px); border-color: var(--blue-accent); background: rgba(37,99,235,0.06); }
+    .fas-icon { font-size: 1.85rem; margin-bottom: 0.85rem; display: block; }
+    .fas-name { font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .fas-desc { font-size: 0.72rem; color: var(--white-mute); line-height: 1.6; }
+
+    /* KARIR */
+    #karir { background: var(--black); }
+    .karir-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .karir-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.75rem; }
+    .karir-tag { padding: 0.48rem 0.95rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 0.78rem; color: var(--white-dim); font-weight: 500; transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s; }
+    .karir-tag:hover { border-color: var(--blue-accent); color: var(--blue-light); background: rgba(37,99,235,0.08); transform: translateY(-2px); }
+    .karir-visual { position: relative; height: 320px; display: flex; align-items: center; justify-content: center; }
+    .karir-ring { position: absolute; border-radius: 50%; border: 1px dashed rgba(37,99,235,0.25); animation: spin-ring 20s linear infinite; }
+    .karir-ring-1 { width: 280px; height: 280px; }
+    .karir-ring-2 { width: 200px; height: 200px; animation-duration: 14s; animation-direction: reverse; }
+    @keyframes spin-ring { from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+    .karir-center { position: relative; z-index: 2; width: 110px; height: 110px; background: linear-gradient(135deg, var(--blue-accent), var(--navy-mid)); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 44px rgba(37,99,235,0.4); font-family: var(--font-display); font-weight: 800; font-size: 0.72rem; text-align: center; line-height: 1.3; }
+    .karir-center .big-num { font-size: 1.9rem; line-height: 1; }
+
+    /* KONTAK */
+    #kontak { background: var(--navy); }
+    .kontak-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; margin-top: 2.75rem; }
+    .kontak-item { display: flex; align-items: flex-start; gap: 0.9rem; margin-bottom: 1.35rem; }
+    .kontak-icon { width: 38px; height: 38px; background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.2); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+    .kontak-key { font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-ghost); margin-bottom: 0.15rem; }
+    .kontak-val { font-size: 0.88rem; color: var(--white-dim); font-weight: 500; }
+    .kontak-val a { color: var(--blue-light); }
+    .kontak-val a:hover { text-decoration: underline; }
+    .map-placeholder { border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); height: 310px; position: relative; background: var(--navy-mid); }
+    .map-placeholder iframe { position:absolute; inset:0; width:100%; height:100%; border:none; filter: invert(0.88) hue-rotate(180deg) saturate(0.55); border-radius: 15px; }
+
+    /* =============================================
+       INDEX RESPONSIVE FIXES
+    ============================================= */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; gap: 0; }
+      .hero-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .prodi-grid { grid-template-columns: 1fr 1fr; }
+      .news-grid { grid-template-columns: 1fr 1fr; }
+      .fasilitas-grid { grid-template-columns: repeat(2, 1fr); }
+      .karir-inner { grid-template-columns: 1fr; }
+      .karir-visual { display: none; }
+      .kontak-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      /* Hero */
+      #hero { padding: calc(var(--nav-h) + 1.75rem) 1rem 3rem; min-height: 100svh; }
+      .hero-h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+      .hero-p { font-size: 0.88rem; }
+      .hero-actions { flex-direction: column; gap: 0.75rem; }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-ghost { width: 100%; justify-content: center; }
+      .hero-stats { gap: 1.2rem; }
+      .stat-num { font-size: 1.45rem; }
+
+      /* About */
+      .about-pillars { grid-template-columns: 1fr 1fr; }
+      .about-dekan { flex-direction: column; text-align: center; }
+
+      /* Prodi */
+      .prodi-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      /* Visi */
+      .vm-grid { grid-template-columns: 1fr; }
+
+      /* News */
+      .news-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .agenda-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+
+      /* Fasilitas */
+      .fasilitas-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Kontak */
+      .map-placeholder { height: 240px; }
+    }
+
+    @media (max-width: 480px) {
+      #hero { padding: calc(var(--nav-h) + 1.25rem) 1rem 2.5rem; }
+      .hero-h1 { font-size: clamp(1.7rem, 8vw, 2.2rem); }
+      .about-pillars { grid-template-columns: 1fr; }
+      .fasilitas-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1rem; }
+      .stat-item { min-width: calc(50% - 0.5rem); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="FST UPITRA Beranda">
+          <div class="nav-logo-badge" aria-hidden="true">FST</div>
+          <div class="nav-logo-text">
+            <strong>UPITRA</strong>
+            <span>Sains &amp; Teknologi</span>
+          </div>
+        </a>
+        <ul class="nav-links" role="list">
+          <li>
+            <a href="#about" class="active">Beranda
+              <!-- <svg class="chevron" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> -->
+            </a>
+            <!-- <ul class="dropdown"><li><a href="#about">Sekilas Pandang</a></li><li><a href="#visi">Visi &amp; Misi</a></li></ul> -->
+          </li>
+          <li>
+            <a href="prodi.html">Program Studi
+              <svg class="chevron" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <ul class="dropdown">
+              <li><a href="prodi.html#si">S1 Sistem Informasi</a></li>
+              <li><a href="prodi.html#inf">S1 Informatika</a></li>
+              <li><a href="prodi.html#rpl">S1 Software Engineering</a></li>
+            </ul>
+          </li>
+          <li><a href="#news">Berita &amp; Agenda</a></li>
+          <li><a href="#fasilitas">Fasilitas</a></li>
+          <li><a href="pendaftaran.html">Pendaftaran</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+          <li><a href="pendaftaran.html" class="nav-cta">Daftar Sekarang</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <p class="mob-section-title">Halaman</p>
+      <a href="#about" onclick="closeMobile()">Tentang FST</a>
+      <a href="#visi" onclick="closeMobile()">Visi &amp; Misi</a>
+      <a href="prodi.html">Program Studi</a>
+      <a href="#news" onclick="closeMobile()">Berita &amp; Agenda</a>
+      <a href="#fasilitas" onclick="closeMobile()">Fasilitas</a>
+      <a href="pendaftaran.html">Pendaftaran</a>
+      <a href="#kontak" onclick="closeMobile()">Kontak</a>
+      <p class="mob-section-title">Program Studi</p>
+      <a href="prodi.html#si">S1 Sistem Informasi</a>
+      <a href="prodi.html#inf">S1 Informatika</a>
+      <a href="prodi.html#rpl">S1 Software Engineering</a>
+      <a href="pendaftaran.html" class="mob-cta" onclick="closeMobile()">Daftar Sekarang →</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" aria-label="Hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div>
+          <div class="hero-eyebrow"><span class="hero-eyebrow-dot" aria-hidden="true"></span>Universitas Pignatelli Triputra · Surakarta</div>
+          <h1 class="hero-h1">Cetak <em>Inovator</em><br />Teknologi<br />Masa Depan</h1>
+          <p class="hero-p">Fakultas Sains &amp; Teknologi UPITRA menghadirkan pendidikan transformatif berbasis <em>link &amp; match</em> industri — membentuk lulusan yang siap memimpin era digital bersama Triputra Group.</p>
+          <div class="hero-actions">
+            <a href="pendaftaran.html" class="btn-primary">
+              Daftar Sekarang
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="prodi.html" class="btn-ghost">Eksplorasi Prodi</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Program Studi</span></div>
+            <div class="stat-item"><span class="stat-num">S1</span><span class="stat-label">Jenjang Sarjana</span></div>
+            <div class="stat-item"><span class="stat-num">10+</span><span class="stat-label">Prospek Karir</span></div>
+            <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Link &amp; Match</span></div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div style="position:relative;">
+            <div class="hero-big-card">
+              <div class="hbc-top">
+                <div class="hbc-icon">🎓</div>
+                <div class="hbc-meta"><span>Fakultas</span><strong>Sains &amp; Teknologi</strong></div>
+              </div>
+              <div class="hbc-prodi-list">
+                <div class="hbc-prodi"><span class="hbc-prodi-name">💻 Sistem Informasi</span><span class="hbc-prodi-badge">S1</span></div>
+                <div class="hbc-prodi"><span class="hbc-prodi-name">⚙️ Informatika</span><span class="hbc-prodi-badge">S1</span></div>
+                <div class="hbc-prodi"><span class="hbc-prodi-name">🛠 Software Engineering</span><span class="hbc-prodi-badge">S1</span></div>
+              </div>
+            </div>
+            <div class="float-card float-card-1"><div class="fc-val">SK 3884</div><div class="fc-lbl">Kemendikbudristek</div></div>
+            <div class="float-card float-card-2"><div class="fc-val">Triputra Group</div><div class="fc-lbl">Link &amp; Match Industri</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <section id="about" aria-label="Tentang FST UPITRA">
+      <div class="container">
+        <div class="about-grid">
+          <div class="reveal-left">
+            <span class="section-label">Tentang Kami</span>
+            <h2 class="section-h2">Fakultas yang<br /><em>Berdampak Nyata</em></h2>
+            <p class="section-desc">FST UPITRA lahir dari transformasi STIE Pignatelli dan ABA Pignatelli menjadi Universitas Pignatelli Triputra (SK 3884/E1/HK.03.00/2022). Berorientasi global dengan semangat kebhinekaan untuk pembangunan masyarakat Indonesia.</p>
+            <div class="about-dekan">
+              <div class="dekan-photo" aria-hidden="true">👨‍🏫</div>
+              <div>
+                <div class="dekan-name">Drs. Dylmoon Hidayat, M.S., M.A., Ph.D</div>
+                <div class="dekan-title">Dekan Fakultas Sains &amp; Teknologi</div>
+                <div class="dekan-contact">📞 (0271) 715333 &nbsp;·&nbsp; ✉ fst@upitra.ac.id</div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-right">
+            <span class="section-label">UPITRA DNA</span>
+            <h3 class="section-h2" style="font-size:clamp(1.3rem,2.5vw,1.65rem);">Nilai-Nilai <em>Kami</em></h3>
+           <div class="about-pillars">
+  <div class="pillar-card">
+    <div class="pillar-icon"><i class="fa-solid fa-compass"></i></div>
+    <div class="pillar-title">Integrity &amp; Ethics</div>
+    <div class="pillar-desc">Menjalani hidup dengan transparan dan jujur dalam setiap tindakan.</div>
+  </div>
+
+  <div class="pillar-card">
+    <div class="pillar-icon"><i class="fa-solid fa-award"></i></div>
+    <div class="pillar-title">Excellence</div>
+    <div class="pillar-desc">Menghasilkan karya melampaui ekspektasi dalam situasi apapun.</div>
+  </div>
+
+  <div class="pillar-card">
+    <div class="pillar-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+    <div class="pillar-title">Compassion</div>
+    <div class="pillar-desc">Menempatkan kemanusiaan di atas kepentingan pribadi.</div>
+  </div>
+
+  <div class="pillar-card">
+    <div class="pillar-icon"><i class="fa-solid fa-seedling"></i></div>
+    <div class="pillar-title">Humility</div>
+    <div class="pillar-desc">Rendah hati, membuka diri, dan terus memperbaiki diri.</div>
+  </div>
+</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PRODI PREVIEW -->
+    <section id="prodi" aria-label="Program Studi">
+      <div class="container">
+        <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;">
+          <div><span class="section-label">Akademik</span><h2 class="section-h2">Program Studi <em>Unggulan</em></h2></div>
+          <a href="prodi.html" class="btn-ghost" style="flex-shrink:0;">Lihat Detail →</a>
+        </div>
+        <div class="prodi-grid">
+          <article class="prodi-card reveal" style="transition-delay:0.08s;">
+            <div class="prodi-number">Prodi 01</div>
+            <div class="prodi-icon-wrap" aria-hidden="true">⚙️</div>
+            <div class="prodi-degree">Sarjana (S-1)</div>
+            <h3 class="prodi-name">Sistem Informasi</h3>
+            <p class="prodi-desc">Menganalisis, merancang, dan mengelola sistem informasi bisnis untuk mendukung pengambilan keputusan di era digital.</p>
+            <div class="prodi-tags"><span class="tag-chip">System Analyst</span><span class="tag-chip">IT Consultant</span><span class="tag-chip">Project Manager</span></div>
+            <a href="prodi.html#si" class="prodi-link">Detail Prodi <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          </article>
+          <article class="prodi-card reveal" style="transition-delay:0.16s;">
+            <div class="prodi-number">Prodi 02</div>
+            <div class="prodi-icon-wrap" aria-hidden="true">⚙️</div>
+            <div class="prodi-degree">Sarjana (S-1)</div>
+            <h3 class="prodi-name">Informatika</h3>
+            <p class="prodi-desc">Menguasai ilmu komputer, algoritma, kecerdasan buatan, dan solusi teknologi inovatif berbasis riset.</p>
+            <div class="prodi-tags"><span class="tag-chip">AI Developer</span><span class="tag-chip">Game Developer</span><span class="tag-chip">Researcher</span></div>
+            <a href="prodi.html#inf" class="prodi-link">Detail Prodi <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          </article>
+          <article class="prodi-card reveal" style="transition-delay:0.24s;">
+            <div class="prodi-number">Prodi 03</div>
+            <div class="prodi-icon-wrap" aria-hidden="true">⚙️</div>
+            <div class="prodi-degree">Sarjana (S-1)</div>
+            <h3 class="prodi-name">Software Engineering</h3>
+            <p class="prodi-desc">Merancang perangkat lunak berkualitas tinggi dengan metodologi Agile dan best practice industri internasional.</p>
+            <div class="prodi-tags"><span class="tag-chip">Web Programmer</span><span class="tag-chip">DevOps</span><span class="tag-chip">Technopreneur</span></div>
+            <a href="prodi.html#rpl" class="prodi-link">Detail Prodi <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- VISI MISI -->
+    <section id="visi" aria-label="Visi dan Misi">
+      <div class="container">
+        <div class="reveal"><span class="section-label">Arah &amp; Tujuan</span><h2 class="section-h2">Visi, Misi &amp; <em>Tujuan</em></h2><p class="section-desc">Landasan akademik untuk menghasilkan lulusan transformatif dan berdampak global.</p></div>
+        <div class="vm-grid">
+          <div class="vm-card reveal"><div class="vm-label">Visi</div><p class="vm-text">Fakultas yang unggul pada tingkat global dalam mengelola bidang ilmu komputer, berorientasi global, menjunjung tinggi nilai-nilai integritas dan bersemangat kebhinekaan untuk berkontribusi nyata bagi pembangunan masyarakat Indonesia yang semakin bermartabat.</p></div>
+          <div class="vm-card reveal" style="transition-delay:0.12s;"><div class="vm-label">Misi</div><ul class="vm-list"><li>Menyelenggarakan pendidikan transformatif dengan kedalaman spiritual, intelektual, dan profesional.</li><li>Melaksanakan penelitian inovatif yang berdampak transformatif bagi masyarakat.</li><li>Menjalankan pengabdian masyarakat melalui pemberdayaan teknologi.</li><li>Menjalin kerjasama dengan institusi pemerintah maupun swasta.</li><li>Mengembangkan tata kelola fakultas modern dan berkualitas.</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- NEWS -->
+    <section id="news" aria-label="Berita dan Agenda">
+      <div class="container">
+        <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;">
+          <div><span class="section-label">Informasi</span><h2 class="section-h2">Berita &amp; <em>Agenda</em></h2></div>
+          <a href="https://www.upitra.ac.id/berita-kampus" class="btn-ghost" target="_blank" rel="noopener" style="flex-shrink:0;">Semua Berita →</a>
+        </div>
+        <div class="news-grid">
+          <article class="news-card reveal" style="transition-delay:0.08s;">
+  <div class="news-thumb">
+    <span class="t-icon"><i class="fa-solid fa-earth-americas"></i></span>
+    <div class="news-thumb-overlay"></div>
+    <span class="news-cat">Internasional</span>
+  </div>
+  <div class="news-body">
+    <div class="news-date">17 Maret 2026</div>
+    <h3 class="news-title">UPITRA Buka Akses Internasional, Mahasiswa Berpeluang Exchange ke Filipina</h3>
+    <p class="news-excerpt">UPITRA menandatangani MoU dengan Ateneo de Zamboanga University (AdZU), membuka peluang student exchange internasional.</p>
+  </div>
+</article>
+
+<article class="news-card reveal" style="transition-delay:0.16s;">
+  <div class="news-thumb" style="background:linear-gradient(135deg,#0d1f3c,#1e4db7);">
+    <span class="t-icon"><i class="fa-solid fa-microscope"></i></span>
+    <div class="news-thumb-overlay"></div>
+    <span class="news-cat">Riset</span>
+  </div>
+  <div class="news-body">
+    <div class="news-date">17 Maret 2026</div>
+    <h3 class="news-title">UPITRA Gandeng Waseda University — Behavioural Economics</h3>
+    <p class="news-excerpt">Kolaborasi riset lintas disiplin bersama Waseda University tentang cara manusia mengambil keputusan ekonomi.</p>
+  </div>
+</article>
+
+<article class="news-card reveal" style="transition-delay:0.24s;">
+  <div class="news-thumb" style="background:linear-gradient(135deg,#162847,#0a1628);">
+    <span class="t-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+    <div class="news-thumb-overlay"></div>
+    <span class="news-cat">IT Guest Lecture</span>
+  </div>
+  <div class="news-body">
+    <div class="news-date">27 Oktober 2025</div>
+    <h3 class="news-title">IT Guest Lecture FST × RPC — Wawasan Industri Langsung</h3>
+    <p class="news-excerpt">Kuliah tamu eksklusif menghadirkan perspektif dunia kerja teknologi langsung ke dalam kampus FST UPITRA.</p>
+  </div>
+</article>
+        </div>
+        <div style="margin-top:2.75rem;">
+          <h3 class="section-h2 reveal" style="font-size:clamp(1.2rem,2.5vw,1.5rem);margin-bottom:0;">Agenda <em>Mendatang</em></h3>
+       <div class="agenda-grid">
+  <div class="agenda-card reveal" style="transition-delay:0.08s;">
+    <div class="agenda-date-box">
+      <span class="agenda-day">27</span>
+      <span class="agenda-month">Okt</span>
+    </div>
+    <div>
+      <div class="agenda-title">IT Guest Lecture FST × RPC</div>
+      <div class="agenda-meta">
+        <i class="fa-solid fa-graduation-cap"></i> Kampus UPITRA · Free
+      </div>
+    </div>
+  </div>
+
+  <div class="agenda-card reveal" style="transition-delay:0.16s;">
+    <div class="agenda-date-box">
+      <span class="agenda-day">13</span>
+      <span class="agenda-month">Okt</span>
+    </div>
+    <div>
+      <div class="agenda-title">English Fest 2025</div>
+      <div class="agenda-meta">
+        <i class="fa-solid fa-microphone-lines"></i> Aula UPITRA · Free
+      </div>
+    </div>
+  </div>
+
+  <div class="agenda-card reveal" style="transition-delay:0.24s;">
+    <div class="agenda-date-box">
+      <span class="agenda-day">17</span>
+      <span class="agenda-month">Mar</span>
+    </div>
+    <div>
+      <div class="agenda-title">MoU UPITRA × Waseda University</div>
+      <div class="agenda-meta">
+        <i class="fa-solid fa-earth-asia"></i> Riset &amp; Akademik · Internasional
+      </div>
+    </div>
+  </div>
+
+  <div class="agenda-card reveal" style="transition-delay:0.32s;">
+    <div class="agenda-date-box">
+      <span class="agenda-day">11</span>
+      <span class="agenda-month">Nov</span>
+    </div>
+    <div>
+      <div class="agenda-title">CEO Talks Toyota Motor Manufacturing</div>
+      <div class="agenda-meta">
+        <i class="fa-solid fa-industry"></i> Bersama Nandy Julyanto · Free
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FASILITAS -->
+    <section id="fasilitas" aria-label="Fasilitas Kampus">
+      <div class="container">
+        <div class="reveal"><span class="section-label">Infrastruktur</span><h2 class="section-h2">Fasilitas <em>Kampus</em></h2><p class="section-desc">Infrastruktur modern untuk memaksimalkan pengalaman belajar dan kolaborasi.</p></div>
+        <div class="fasilitas-grid">
+  <div class="fas-card reveal" style="transition-delay:0.06s;"><span class="fas-icon"><i class="fa-solid fa-desktop"></i></span><div class="fas-name">Lab Komputer</div><p class="fas-desc">Komputer terbaru dan tercanggih mendukung transformasi pembelajaran.</p></div>
+  <div class="fas-card reveal" style="transition-delay:0.12s;"><span class="fas-icon"><i class="fa-solid fa-wifi"></i></span><div class="fas-name">Internet &amp; WiFi</div><p class="fas-desc">Akses internet tanpa batas di seluruh area kampus.</p></div>
+  <div class="fas-card reveal" style="transition-delay:0.18s;"><span class="fas-icon"><i class="fa-solid fa-users-rectangle"></i></span><div class="fas-name">Ruang Publik</div><p class="fas-desc">Ruang nyaman untuk belajar, berdiskusi, dan bertukar ilmu.</p></div>
+  <div class="fas-card reveal" style="transition-delay:0.24s;"><span class="fas-icon"><i class="fa-solid fa-chalkboard-user"></i></span><div class="fas-name">Ruang Kelas</div><p class="fas-desc">Kelas nyaman dan sejuk untuk transfer pengetahuan optimal.</p></div>
+  <div class="fas-card reveal" style="transition-delay:0.30s;"><span class="fas-icon"><i class="fa-solid fa-book-open-reader"></i></span><div class="fas-name">Perpustakaan</div><p class="fas-desc">E-Journal dan sistem perpustakaan digital terintegrasi.</p></div>
+  <div class="fas-card reveal" style="transition-delay:0.36s;"><span class="fas-icon"><i class="fa-solid fa-briefcase"></i></span><div class="fas-name">Career Center</div><p class="fas-desc">Pusat pengembangan karir dan penempatan kerja mahasiswa.</p></div>
+  <div class="fas-card reveal" style="transition-delay:0.42s;"><span class="fas-icon"><i class="fa-solid fa-microscope"></i></span><div class="fas-name">Lab Riset</div><p class="fas-desc">Fasilitas riset dan inovasi teknologi terapan.</p></div>
+  <div class="fas-card reveal" style="transition-delay:0.48s;"><span class="fas-icon"><i class="fa-solid fa-gears"></i></span><div class="fas-name">SIAKAD &amp; LMS</div><p class="fas-desc">Sistem akademik digital: SIAKAD, LMS-Unity, dan e-journal.</p></div>
+
+  <div class="fas-card reveal" style="transition-delay:0.54s;">
+    <span class="fas-icon"><i class="fa-solid fa-globe"></i></span>
+    <div class="fas-name">Pendaftaran Online</div>
+    <p class="fas-desc">Sistem admisi terpadu yang dapat diakses darimana saja secara real-time.</p>
+  </div>
+
+  <div class="fas-card reveal" style="transition-delay:0.60s;">
+    <span class="fas-icon"><i class="fa-solid fa-video"></i></span>
+    <div class="fas-name">Virtual Meeting</div>
+    <p class="fas-desc">Dukungan Zoom & G-Meet premium untuk perkuliahan hybrid yang lancar.</p>
+  </div>
+
+  <div class="fas-card reveal" style="transition-delay:0.66s;">
+    <span class="fas-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+    <div class="fas-name">Cloud Storage</div>
+    <p class="fas-desc">Penyimpanan data awan gratis bagi mahasiswa untuk tugas dan kolaborasi.</p>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- KARIR -->
+    <section id="karir" aria-label="Prospek Karir">
+      <div class="container">
+        <div class="karir-inner">
+          <div class="reveal-left">
+            <span class="section-label">Karir</span>
+            <h2 class="section-h2">Prospek Karir<br /><em>Tak Terbatas</em></h2>
+            <p class="section-desc">Lulusan FST UPITRA siap berkarir di berbagai sektor teknologi dan bisnis digital dengan dukungan jaringan Triputra Group.</p>
+            <div class="karir-tags">
+              <span class="karir-tag">Project Manager</span><span class="karir-tag">Web Programmer</span><span class="karir-tag">System Analyst</span><span class="karir-tag">Software Tester</span><span class="karir-tag">IT Trainer</span><span class="karir-tag">Game Developer</span><span class="karir-tag">Multimedia Dev</span><span class="karir-tag">IT Consultant</span><span class="karir-tag">Perbankan Digital</span><span class="karir-tag">Technopreneur</span><span class="karir-tag">Akademisi</span><span class="karir-tag">Researcher</span>
+            </div>
+          </div>
+          <div class="karir-visual reveal-right" aria-hidden="true">
+            <div class="karir-ring karir-ring-1"></div>
+            <div class="karir-ring karir-ring-2"></div>
+            <div class="karir-center"><span class="big-num">10+</span>Prospek<br/>Karir</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- KONTAK -->
+    <section id="kontak" aria-label="Kontak dan Lokasi">
+      <div class="container">
+        <div class="reveal"><span class="section-label">Hubungi Kami</span><h2 class="section-h2">Kontak &amp; <em>Lokasi</em></h2><p class="section-desc">Tim kami siap membantu setiap hari kerja.</p></div>
+        <div class="kontak-grid">
+          <div class="reveal-left">
+            <div class="kontak-item"><div class="kontak-icon" aria-hidden="true">📍</div><div><div class="kontak-key">Alamat</div><div class="kontak-val">Jl. Duwet No. 1 Karangasem, Laweyan,<br />Surakarta 57145, Jawa Tengah</div></div></div>
+            <div class="kontak-item"><div class="kontak-icon" aria-hidden="true">📞</div><div><div class="kontak-key">Telepon / WhatsApp</div><div class="kontak-val"><a href="tel:08112907500">0811-290-7500</a></div></div></div>
+            <div class="kontak-item"><div class="kontak-icon" aria-hidden="true">📠</div><div><div class="kontak-key">Telepon Kampus</div><div class="kontak-val"><a href="tel:02717155333">(0271) 715333</a></div></div></div>
+            <div class="kontak-item"><div class="kontak-icon" aria-hidden="true">✉</div><div><div class="kontak-key">Email Admisi</div><div class="kontak-val"><a href="mailto:admission@upitra.ac.id">admission@upitra.ac.id</a></div></div></div>
+            <div class="kontak-item"><div class="kontak-icon" aria-hidden="true">🏫</div><div><div class="kontak-key">Email FST</div><div class="kontak-val"><a href="mailto:fst@upitra.ac.id">fst@upitra.ac.id</a></div></div></div>
+            <div class="kontak-item"><div class="kontak-icon" aria-hidden="true">🕐</div><div><div class="kontak-key">Jam Operasional</div><div class="kontak-val">Senin – Jumat, 08:00–17:00 WIB</div></div></div>
+            <div style="margin-top:1.5rem;"><a href="pendaftaran.html" class="btn-primary">Daftar Online Sekarang <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></div>
+          </div>
+          <div class="reveal-right">
+            <div class="map-placeholder">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.5386660527387!2d110.79680497594657!3d-7.562022692448131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16a3a9daeea5%3A0x97e8e78abb1b06e6!2sUniversitas%20Pignatelli%20Triputra!5e0!3m2!1sid!2sid!4v1712214000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi UPITRA Surakarta" aria-label="Google Maps UPITRA"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-logo-badge">FST</div><div class="nav-logo-text"><strong>UPITRA</strong><span>Sains &amp; Teknologi</span></div></div>
+        <p>Fakultas Sains &amp; Teknologi Universitas Pignatelli Triputra — mencetak inovator teknologi berdampak nyata melalui pendidikan transformatif berbasis link &amp; match industri.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Program Studi</div>
+        <nav class="footer-links">
+          <a href="prodi.html#si">S1 Sistem Informasi</a>
+          <a href="prodi.html#inf">S1 Informatika</a>
+          <a href="prodi.html#rpl">S1 Software Engineering</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Support System</div>
+        <nav class="footer-links">
+          <a href="https://mhs.upitra.ac.id/" target="_blank" rel="noopener">SIAKAD Upitra</a>
+          <a href="https://unity.upitra.ac.id/" target="_blank" rel="noopener">LMS-Unity</a>
+          <a href="https://siper.upitra.ac.id/" target="_blank" rel="noopener">Library</a>
+          <a href="https://jurnal.upitra.ac.id/" target="_blank" rel="noopener">E-Journal</a>
+          <a href="https://ucc.upitra.ac.id/" target="_blank" rel="noopener">Career Center</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Tautan</div>
+        <nav class="footer-links">
+          <a href="index.html">Beranda</a>
+          <a href="prodi.html">Program Studi</a>
+          <a href="pendaftaran.html">Pendaftaran</a>
+          <a href="https://www.upitra.ac.id/biaya-kuliah" target="_blank" rel="noopener">Beasiswa</a>
+          <a href="https://www.upitra.ac.id/" target="_blank" rel="noopener">Website Utama</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 FST UPITRA · <a href="https://www.upitra.ac.id/" target="_blank" rel="noopener">Universitas Pignatelli Triputra</a> · Yayasan Santo Yosef Maria Pignatelli Surakarta.</p>
+      <div class="footer-badges"><span class="footer-badge">SK 3884/2022</span><span class="footer-badge">Link &amp; Match</span><span class="footer-badge">Triputra Group</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('active', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    function closeMobile() {
+      mobileMenu.classList.remove('open'); hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = '';
+    }
+    document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobile(); });
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(el => ro.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' }); closeMobile(); }
+      });
+    });
+  </script>
+</body>
+</html>

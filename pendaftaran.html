@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Panduan Pendaftaran FST UPITRA — Persyaratan, biaya kuliah, beasiswa, cara daftar, dan FAQ lengkap untuk calon mahasiswa Fakultas Sains dan Teknologi Universitas Pignatelli Triputra." />
+  <title>Pendaftaran — FST UPITRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fst-style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    /* =============================================
+       PENDAFTARAN PAGE — SPECIFIC STYLES
+    ============================================= */
+
+    /* Main layout */
+    .pmb-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 3rem;
+      align-items: start;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .pmb-main {}
+    .pmb-sidebar { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
+
+    /* Steps */
+    .steps-section { padding: 5rem 1.5rem; background: var(--black); }
+
+    /* Syarat card */
+    .syarat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .syarat-item {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 1.1rem; background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+    .syarat-item:hover { border-color: rgba(37,99,235,0.35); }
+    .syarat-check {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .syarat-text { font-size: 0.83rem; color: var(--white-mute); line-height: 1.65; }
+    .syarat-text strong { display: block; color: var(--white-dim); font-size: 0.85rem; margin-bottom: 0.15rem; }
+
+    /* Biaya table */
+    .biaya-section { padding: 5rem 1.5rem; background: var(--navy); }
+    .biaya-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 2rem; }
+    .biaya-card {
+      padding: 1.75rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .biaya-card:hover { transform: translateY(-4px); }
+    .biaya-card.featured {
+      border-color: var(--blue-accent);
+      background: rgba(37,99,235,0.07);
+    }
+    .biaya-card.featured::before { content:'Paling Diminati'; position:absolute; top:0.75rem; right:-1.5rem; background:var(--blue-accent); color:var(--white); font-size:0.58rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 2rem; transform:rotate(35deg); white-space:nowrap; }
+    .biaya-prodi { font-family:var(--font-display); font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue-light); margin-bottom:0.75rem; }
+    .biaya-amount { font-family:var(--font-display); font-size:clamp(1.5rem,3vw,2rem); font-weight:800; color:var(--white); margin-bottom:0.3rem; line-height:1.1; }
+    .biaya-period { font-size:0.72rem; color:var(--white-ghost); }
+    .biaya-divider { height:1px; background:rgba(255,255,255,0.08); margin:1.25rem 0; }
+    .biaya-items { text-align:left; display:flex; flex-direction:column; gap:0.5rem; }
+    .biaya-row { display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; }
+    .biaya-row span:first-child { color:var(--white-mute); }
+    .biaya-row span:last-child { color:var(--white-dim); font-weight:600; }
+
+    /* Beasiswa */
+    .beasiswa-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:2rem; }
+    .beasiswa-card {
+      padding:1.4rem;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;
+      transition:border-color 0.2s, background 0.2s;
+    }
+    .beasiswa-card:hover { border-color:rgba(37,99,235,0.4); background:rgba(37,99,235,0.05); }
+    .bea-icon { font-size:1.6rem; margin-bottom:0.65rem; display:block; }
+    .bea-name { font-family:var(--font-display); font-size:0.88rem; font-weight:700; color:var(--white); margin-bottom:0.35rem; }
+    .bea-desc { font-size:0.78rem; color:var(--white-mute); line-height:1.65; margin-bottom:0.75rem; }
+    .bea-value { font-family:var(--font-display); font-size:0.75rem; font-weight:700; color:var(--blue-light); }
+
+    /* FAQ */
+    .faq-section { padding: 5rem 1.5rem; background: var(--black); }
+    .faq-wrap { max-width: 760px; margin-top: 2rem; }
+
+    /* Contact sidebar card */
+    .sidebar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-card-title { font-family:var(--font-display); font-size:0.8rem; font-weight:700; color:var(--white); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .sidebar-info { display:flex; flex-direction:column; gap:0.9rem; }
+    .sidebar-row { display:flex; align-items:flex-start; gap:0.75rem; }
+    .sidebar-ico { width:32px; height:32px; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.2); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; flex-shrink:0; }
+    .sidebar-key { font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--white-ghost); }
+    .sidebar-val { font-size:0.82rem; color:var(--white-dim); font-weight:500; }
+    .sidebar-val a { color:var(--blue-light); }
+
+    /* Inquiry form section */
+    .form-section { padding: 5rem 1.5rem; background: var(--navy); }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+    .form-grid .form-group.full { grid-column: 1 / -1; }
+    .form-notice { font-size:0.75rem; color:var(--white-ghost); margin-top:0.6rem; line-height:1.6; }
+    .form-success { display:none; padding:1.25rem; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:12px; color:#6ee7b7; font-size:0.88rem; text-align:center; margin-top:1rem; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .pmb-layout { grid-template-columns: 1fr; }
+      .pmb-sidebar { position: static; }
+      .biaya-grid { grid-template-columns: 1fr; max-width: 400px; }
+    }
+    @media (max-width: 768px) {
+      .steps-section, .biaya-section, .faq-section, .form-section { padding: 3.5rem 1rem; }
+      .syarat-grid { grid-template-columns: 1fr; }
+      .beasiswa-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .form-group.full { grid-column: 1; }
+      .biaya-grid { max-width: 100%; }
+      .pmb-layout { padding: 0 1rem; }
+    }
+    @media (max-width: 480px) {
+      .biaya-card.featured::before { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="FST UPITRA Beranda">
+          <div class="nav-logo-badge" aria-hidden="true">FST</div>
+          <div class="nav-logo-text"><strong>UPITRA</strong><span>Sains &amp; Teknologi</span></div>
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Beranda</a></li>
+          <li>
+            <a href="prodi.html">Program Studi
+              <svg class="chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5 5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <ul class="dropdown"><li><a href="prodi.html#si">S1 Sistem Informasi</a></li><li><a href="prodi.html#inf">S1 Informatika</a></li><li><a href="prodi.html#rpl">S1 Software Engineering</a></li></ul>
+          </li>
+          <li><a href="index.html#news">Berita &amp; Agenda</a></li>
+          <li><a href="index.html#fasilitas">Fasilitas</a></li>
+          <li><a href="pendaftaran.html" class="active">Pendaftaran</a></li>
+          <li><a href="index.html#kontak">Kontak</a></li>
+          <li><a href="https://pmb.upitra.ac.id/" class="nav-cta" target="_blank" rel="noopener">Daftar Sekarang</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <p class="mob-section-title">Halaman</p>
+      <a href="index.html">Beranda</a>
+      <a href="prodi.html">Program Studi</a>
+      <a href="index.html#news">Berita &amp; Agenda</a>
+      <a href="index.html#fasilitas">Fasilitas</a>
+      <a href="index.html#kontak">Kontak</a>
+      <p class="mob-section-title">Pendaftaran</p>
+      <a href="#langkah" onclick="closeMobile()">Langkah Daftar</a>
+      <a href="#syarat" onclick="closeMobile()">Persyaratan</a>
+      <a href="#biaya" onclick="closeMobile()">Biaya Kuliah</a>
+      <a href="#beasiswa" onclick="closeMobile()">Beasiswa</a>
+      <a href="#faq" onclick="closeMobile()">FAQ</a>
+      <a href="https://pmb.upitra.ac.id/" target="_blank" rel="noopener" class="mob-cta">Daftar Online →</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-grid" aria-hidden="true"></div>
+    <div class="page-hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Beranda</a><span aria-hidden="true">›</span>
+        <span aria-current="page">Pendaftaran</span>
+      </nav>
+      <h1>Panduan <em>Pendaftaran</em></h1>
+      <p>Semua yang perlu kamu tahu untuk mendaftar di FST UPITRA — persyaratan, biaya, beasiswa, dan cara daftar secara online maupun langsung di kampus.</p>
+    </div>
+  </div>
+
+  <main>
+    <!-- LANGKAH PENDAFTARAN -->
+    <section id="langkah" class="steps-section">
+      <div class="pmb-layout">
+        <div class="pmb-main">
+          <span class="section-label">Cara Daftar</span>
+          <h2 class="section-h2">Langkah <em>Pendaftaran</em></h2>
+          <p class="section-desc">Proses pendaftaran mudah — cukup 5 langkah dan kamu sudah menjadi calon mahasiswa FST UPITRA.</p>
+
+          <div style="margin-top:2.5rem;">
+            <div class="step-line reveal">
+              <div class="step-num" aria-hidden="true">1</div>
+              <div class="step-title">Persiapkan Dokumen</div>
+              <p class="step-desc">Siapkan scan/foto KTP/KK, Ijazah SMA/SMK/MA (atau surat keterangan lulus), dan foto terbaru 3×4 berukuran minimal 200KB. Pastikan semua dokumen jelas dan tidak blur.</p>
+            </div>
+            <div class="step-line reveal" style="transition-delay:0.1s;">
+              <div class="step-num" aria-hidden="true">2</div>
+              <div class="step-title">Daftar Online / Kunjungi Kampus</div>
+              <p class="step-desc">Akses portal PMB di <a href="https://pmb.upitra.ac.id/" target="_blank" rel="noopener" style="color:var(--blue-light);">pmb.upitra.ac.id</a> atau langsung datang ke bagian Admisi UPITRA. Bagian admisi buka Senin–Jumat pukul 08.00–17.00 WIB.</p>
+            </div>
+            <div class="step-line reveal" style="transition-delay:0.2s;">
+              <div class="step-num" aria-hidden="true">3</div>
+              <div class="step-title">Pilih Program Studi</div>
+              <p class="step-desc">Pilih salah satu dari tiga prodi FST: S1 Sistem Informasi, S1 Informatika, atau S1 Software Engineering. Konsultasikan dengan tim admisi jika masih ragu.</p>
+            </div>
+            <div class="step-line reveal" style="transition-delay:0.3s;">
+              <div class="step-num" aria-hidden="true">4</div>
+              <div class="step-title">Pembayaran &amp; Verifikasi</div>
+              <p class="step-desc">Lakukan pembayaran uang pangkal dan SPP semester pertama sesuai program yang dipilih. Tim admisi akan melakukan verifikasi dokumen dalam 1–3 hari kerja.</p>
+            </div>
+            <div class="step-line reveal" style="transition-delay:0.4s;">
+              <div class="step-num" aria-hidden="true">5</div>
+              <div class="step-title">Selesai — Kamu Mahasiswa FST! 🎉</div>
+              <p class="step-desc">Setelah diterima, kamu akan mendapatkan NIM, akses SIAKAD, LMS-Unity, dan informasi orientasi mahasiswa baru. Selamat datang di keluarga besar FST UPITRA!</p>
+            </div>
+          </div>
+
+          <!-- Syarat -->
+          <div id="syarat" style="margin-top:3.5rem;">
+            <span class="section-label">Persyaratan</span>
+            <h3 class="section-h2" style="font-size:clamp(1.3rem,2.5vw,1.8rem);">Dokumen yang <em>Dibutuhkan</em></h3>
+            <div class="syarat-grid" style="margin-top:1.5rem;">
+              <div class="syarat-item reveal">
+                <div class="syarat-check">✓</div>
+                <div class="syarat-text"><strong>Ijazah / SKL</strong>Ijazah SMA/SMK/MA atau Surat Keterangan Lulus dari sekolah asal.</div>
+              </div>
+              <div class="syarat-item reveal" style="transition-delay:0.08s;">
+                <div class="syarat-check">✓</div>
+                <div class="syarat-text"><strong>KTP / Kartu Keluarga</strong>Identitas diri calon mahasiswa yang masih berlaku.</div>
+              </div>
+              <div class="syarat-item reveal" style="transition-delay:0.16s;">
+                <div class="syarat-check">✓</div>
+                <div class="syarat-text"><strong>Foto Terbaru</strong>Foto berwarna 3×4 cm, background merah atau biru, formal.</div>
+              </div>
+              <div class="syarat-item reveal" style="transition-delay:0.24s;">
+                <div class="syarat-check">✓</div>
+                <div class="syarat-text"><strong>Rapor SMA/SMK</strong>Khusus untuk pengajuan beasiswa prestasi akademik.</div>
+              </div>
+              <div class="syarat-item reveal" style="transition-delay:0.32s;">
+                <div class="syarat-check">✓</div>
+                <div class="syarat-text"><strong>Sertifikat Prestasi</strong>(Opsional) Piagam atau sertifikat untuk beasiswa prestasi non-akademik.</div>
+              </div>
+              <div class="syarat-item reveal" style="transition-delay:0.40s;">
+                <div class="syarat-check">✓</div>
+                <div class="syarat-text"><strong>Surat Keterangan Tidak Mampu</strong>(Opsional) Untuk pengajuan beasiswa SKTM dari kelurahan.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="pmb-sidebar">
+          <div class="sidebar-card reveal">
+            <div class="sidebar-card-title">Kontak Admisi</div>
+            <div class="sidebar-info">
+              <div class="sidebar-row"><div class="sidebar-ico">📞</div><div><div class="sidebar-key">WhatsApp / Telepon</div><div class="sidebar-val"><a href="tel:08112907500">0811-290-7500</a></div></div></div>
+              <div class="sidebar-row"><div class="sidebar-ico">✉</div><div><div class="sidebar-key">Email</div><div class="sidebar-val"><a href="mailto:admission@upitra.ac.id">admission@upitra.ac.id</a></div></div></div>
+              <div class="sidebar-row"><div class="sidebar-ico">🕐</div><div><div class="sidebar-key">Jam Buka</div><div class="sidebar-val">Senin–Jumat<br />08:00–17:00 WIB</div></div></div>
+              <div class="sidebar-row"><div class="sidebar-ico">📍</div><div><div class="sidebar-key">Alamat</div><div class="sidebar-val">Jl. Duwet No. 1 Karangasem, Laweyan, Surakarta 57145</div></div></div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <a href="https://pmb.upitra.ac.id/" class="btn-primary" target="_blank" rel="noopener" style="width:100%;justify-content:center;">
+                Daftar Online Sekarang →
+              </a>
+            </div>
+          </div>
+
+          <div class="sidebar-card reveal" style="transition-delay:0.1s;">
+            <div class="sidebar-card-title">Pilihan Program</div>
+            <div style="display:flex;flex-direction:column;gap:0.6rem;">
+              <a href="prodi.html#si" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(37,99,235,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+                <span style="font-size:1.2rem;">💻</span>
+                <div><div style="font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--white);">Sistem Informasi</div><div style="font-size:0.68rem;color:var(--blue-light);">S1 · 4 Tahun</div></div>
+              </a>
+              <a href="prodi.html#inf" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(37,99,235,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+                <span style="font-size:1.2rem;">⚙️</span>
+                <div><div style="font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--white);">Informatika</div><div style="font-size:0.68rem;color:var(--blue-light);">S1 · 4 Tahun</div></div>
+              </a>
+              <a href="prodi.html#rpl" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(37,99,235,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+                <span style="font-size:1.2rem;">🛠</span>
+                <div><div style="font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--white);">Software Engineering</div><div style="font-size:0.68rem;color:var(--blue-light);">S1 · 4 Tahun</div></div>
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- BIAYA KULIAH -->
+    <section id="biaya" class="biaya-section">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-label">Investasi Pendidikan</span>
+          <h2 class="section-h2">Biaya <em>Kuliah</em></h2>
+          <p class="section-desc">Informasi biaya kuliah FST UPITRA. Tersedia pilihan cicilan dan berbagai jalur beasiswa.</p>
+        </div>
+        <div class="biaya-grid">
+  <div class="biaya-card reveal" style="transition-delay:0.08s;">
+    <div class="biaya-prodi"><i class="fa-solid fa-laptop-code"></i> Sistem Informasi</div>
+    <div class="biaya-amount">Terjangkau</div>
+    <div class="biaya-period">per Semester</div>
+    <div class="biaya-divider"></div>
+    <div class="biaya-items">
+      <div class="biaya-row"><span>Uang Pangkal</span><span>Lihat Detail</span></div>
+      <div class="biaya-row"><span>SPP per Semester</span><span>Lihat Detail</span></div>
+      <div class="biaya-row"><span>Cicilan Tersedia</span><span><i class="fa-solid fa-circle-check"></i></span></div>
+      <div class="biaya-row"><span>Beasiswa</span><span><i class="fa-solid fa-circle-check"></i></span></div>
+    </div>
+    <div style="margin-top:1.2rem;"><a href="https://www.upitra.ac.id/biaya-kuliah" class="btn-ghost" target="_blank" rel="noopener" style="width:100%;justify-content:center;font-size:0.78rem;padding:0.65rem 1rem;">Cek Biaya Resmi</a></div>
+  </div>
+
+  <div class="biaya-card featured reveal" style="transition-delay:0.16s;">
+    <div class="biaya-prodi"><i class="fa-solid fa-code-branch"></i> Software Engineering</div>
+    <div class="biaya-amount">Terjangkau</div>
+    <div class="biaya-period">per Semester</div>
+    <div class="biaya-divider"></div>
+    <div class="biaya-items">
+      <div class="biaya-row"><span>Uang Pangkal</span><span>Lihat Detail</span></div>
+      <div class="biaya-row"><span>SPP per Semester</span><span>Lihat Detail</span></div>
+      <div class="biaya-row"><span>Cicilan Tersedia</span><span><i class="fa-solid fa-circle-check"></i></span></div>
+      <div class="biaya-row"><span>Beasiswa</span><span><i class="fa-solid fa-circle-check"></i></span></div>
+    </div>
+    <div style="margin-top:1.2rem;"><a href="https://www.upitra.ac.id/biaya-kuliah" class="btn-primary" target="_blank" rel="noopener" style="width:100%;justify-content:center;font-size:0.78rem;padding:0.65rem 1rem;">Cek Biaya Resmi</a></div>
+  </div>
+
+  <div class="biaya-card reveal" style="transition-delay:0.24s;">
+    <div class="biaya-prodi"><i class="fa-solid fa-microchip"></i> Informatika</div>
+    <div class="biaya-amount">Terjangkau</div>
+    <div class="biaya-period">per Semester</div>
+    <div class="biaya-divider"></div>
+    <div class="biaya-items">
+      <div class="biaya-row"><span>Uang Pangkal</span><span>Lihat Detail</span></div>
+      <div class="biaya-row"><span>SPP per Semester</span><span>Lihat Detail</span></div>
+      <div class="biaya-row"><span>Cicilan Tersedia</span><span><i class="fa-solid fa-circle-check"></i></span></div>
+      <div class="biaya-row"><span>Beasiswa</span><span><i class="fa-solid fa-circle-check"></i></span></div>
+    </div>
+    <div style="margin-top:1.2rem;"><a href="https://www.upitra.ac.id/biaya-kuliah" class="btn-ghost" target="_blank" rel="noopener" style="width:100%;justify-content:center;font-size:0.78rem;padding:0.65rem 1rem;">Cek Biaya Resmi</a></div>
+  </div>
+</div>
+        <p style="font-size:0.78rem;color:var(--white-ghost);margin-top:1.5rem;text-align:center;">* Biaya kuliah sewaktu-waktu dapat berubah. Silakan cek informasi terbaru di <a href="https://www.upitra.ac.id/biaya-kuliah" target="_blank" rel="noopener" style="color:var(--blue-light);">upitra.ac.id/biaya-kuliah</a> atau hubungi admisi.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- BEASISWA -->
+   <section id="beasiswa" style="padding:5rem 1.5rem;background:var(--black);">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Bantuan Keuangan</span>
+      <h2 class="section-h2">Jalur <em>Beasiswa</em></h2>
+      <p class="section-desc">Kuliah di UPITRA bisa murah bahkan gratis! Tersedia berbagai jalur beasiswa untuk mahasiswa baru.</p>
+    </div>
+    
+    <div class="beasiswa-grid">
+      <div class="beasiswa-card reveal" style="transition-delay:0.08s;">
+        <span class="bea-icon"><i class="fa-solid fa-trophy"></i></span>
+        <div class="bea-name">Beasiswa Prestasi Akademik</div>
+        <p class="bea-desc">Diberikan kepada calon mahasiswa yang memiliki nilai rapor SMA/SMK rata-rata tinggi dan memenuhi syarat yang ditentukan.</p>
+        <div class="bea-value">Pengurangan SPP hingga 100%</div>
+      </div>
+
+      <div class="beasiswa-card reveal" style="transition-delay:0.16s;">
+        <span class="bea-icon"><i class="fa-solid fa-medal"></i></span>
+        <div class="bea-name">Beasiswa Prestasi Non-Akademik</div>
+        <p class="bea-desc">Untuk calon mahasiswa berprestasi di bidang olahraga, seni, atau kegiatan sosial yang memiliki sertifikat/piagam penghargaan.</p>
+        <div class="bea-value">Pengurangan SPP hingga 75%</div>
+      </div>
+
+      <div class="beasiswa-card reveal" style="transition-delay:0.24s;">
+        <span class="bea-icon"><i class="fa-solid fa-handshake-angle"></i></span>
+        <div class="bea-name">Beasiswa SKTM / Tidak Mampu</div>
+        <p class="bea-desc">Beasiswa berbasis kondisi ekonomi keluarga. Diperlukan Surat Keterangan Tidak Mampu (SKTM) dari kelurahan setempat.</p>
+        <div class="bea-value">Pengurangan SPP hingga 50%</div>
+      </div>
+
+      <div class="beasiswa-card reveal" style="transition-delay:0.32s;">
+        <span class="bea-icon"><i class="fa-solid fa-star-dua-tone"></i><i class="fa-solid fa-star"></i></span>
+        <div class="bea-name">Beasiswa KIP Kuliah</div>
+        <p class="bea-desc">Beasiswa pemerintah dari Kemendikbudristek untuk mahasiswa dari keluarga tidak mampu secara ekonomi namun berprestasi.</p>
+        <div class="bea-value">Gratis SPP + Uang Saku</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:rgba(37,99,235,0.07);border:1px solid rgba(37,99,235,0.2);border-radius:14px;" class="reveal">
+      <p style="font-size:0.85rem;color:var(--white-mute);line-height:1.75;">
+        <i class="fa-solid fa-lightbulb" style="color:#fbbf24; margin-right: 8px;"></i> 
+        <strong style="color:var(--white);">Konsultasi Beasiswa:</strong> Hubungi tim admisi kami untuk informasi lebih lengkap tentang persyaratan dan kuota beasiswa yang tersedia. Jangan ragu untuk bertanya — kami siap membantu Anda menemukan jalur terbaik!
+      </p>
+    </div>
+  </div>
+</section>
+
+    <div class="divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-label">Pertanyaan Umum</span>
+          <h2 class="section-h2">FAQ <em>Pendaftaran</em></h2>
+          <p class="section-desc">Jawaban untuk pertanyaan yang paling sering ditanyakan calon mahasiswa.</p>
+        </div>
+        <div class="faq-wrap" id="faq-list">
+          <div class="accordion-item reveal">
+            <button class="accordion-header" aria-expanded="false">Apakah bisa daftar tanpa datang ke kampus?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">Ya! Pendaftaran bisa dilakukan sepenuhnya secara online melalui portal PMB di pmb.upitra.ac.id. Upload dokumen secara digital dan proses administrasi dapat diselesaikan dari rumah. Namun kamu juga bisa datang langsung ke kampus jika membutuhkan bantuan atau konsultasi tatap muka.</div></div>
+          </div>
+          <div class="accordion-item reveal" style="transition-delay:0.06s;">
+            <button class="accordion-header" aria-expanded="false">Jurusan apa saja yang tersedia di FST UPITRA?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">FST UPITRA memiliki tiga program studi sarjana (S1): S1 Sistem Informasi, S1 Informatika, dan S1 Rekayasa Perangkat Lunak (Software Engineering). Ketiganya memiliki fokus berbeda — lihat halaman Program Studi untuk perbandingan lengkap.</div></div>
+          </div>
+          <div class="accordion-item reveal" style="transition-delay:0.12s;">
+            <button class="accordion-header" aria-expanded="false">Berapa lama masa studi di FST UPITRA?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">Masa studi normal adalah 4 tahun (8 semester). Namun mahasiswa yang memenuhi syarat dapat menyelesaikan lebih cepat. Setiap semester meliputi perkuliahan, praktikum, dan kegiatan akademik lainnya.</div></div>
+          </div>
+          <div class="accordion-item reveal" style="transition-delay:0.18s;">
+            <button class="accordion-header" aria-expanded="false">Apakah UPITRA terakreditasi?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">Universitas Pignatelli Triputra telah resmi berdiri berdasarkan SK Kemendikbudristek No. 3884/E1/HK.03.00/2022. Program studi sedang dalam proses akreditasi oleh BAN-PT. Prodi D3 Bahasa Inggris UPITRA telah menjalani Asesmen Lapangan BAN-PT pada Februari 2026 sebagai contoh komitmen mutu UPITRA.</div></div>
+          </div>
+          <div class="accordion-item reveal" style="transition-delay:0.24s;">
+            <button class="accordion-header" aria-expanded="false">Apakah tersedia program kuliah sambil kerja?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">Ya! Sebagai kampus yang berorientasi industri dan berbasis link &amp; match dengan Triputra Group, UPITRA memiliki kebijakan yang memungkinkan mahasiswa mengatur jadwal kuliah sembari bekerja. Konsultasikan kebutuhan jadvalmu dengan bagian admisi.</div></div>
+          </div>
+          <div class="accordion-item reveal" style="transition-delay:0.30s;">
+            <button class="accordion-header" aria-expanded="false">Bagaimana prospek karir lulusan FST UPITRA?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">Lulusan FST UPITRA memiliki 10+ prospek karir yang beragam: Project Manager, Web Programmer, System Analyst, Software Tester, IT Trainer, Game Developer, Multimedia Developer, IT Consultant, perbankan digital, Technopreneur, Akademisi, dan Researcher. Didukung jaringan Triputra Group dan Persada Capital Investama sebagai mitra industri utama.</div></div>
+          </div>
+          <div class="accordion-item reveal" style="transition-delay:0.36s;">
+            <button class="accordion-header" aria-expanded="false">Apakah ada kesempatan pertukaran pelajar (student exchange)?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">Ya! UPITRA aktif menjalin kerjasama internasional. Pada Maret 2026, UPITRA menandatangani MoU dengan Ateneo de Zamboanga University (AdZU) Filipina, membuka peluang student exchange. UPITRA juga telah menjalin kerjasama riset dengan Waseda University Jepang dan sebelumnya dengan LPU Manila.</div></div>
+          </div>
+          <div class="accordion-item reveal" style="transition-delay:0.42s;">
+            <button class="accordion-header" aria-expanded="false">Bagaimana cara mengajukan beasiswa?<span class="accordion-icon">+</span></button>
+            <div class="accordion-body"><div class="accordion-body-inner">Pengajuan beasiswa dilakukan bersamaan dengan proses pendaftaran. Siapkan dokumen pendukung (rapor, sertifikat, SKTM) dan informasikan kepada petugas admisi saat mendaftar. Tim admisi akan memandu kamu untuk menentukan jalur beasiswa yang paling sesuai.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FORM TANYA ADMISI -->
+    <section class="form-section">
+      <div class="container" style="max-width:900px;">
+        <div class="reveal">
+          <span class="section-label">Hubungi Kami</span>
+          <h2 class="section-h2">Ada Pertanyaan? <em>Tanya Admisi</em></h2>
+          <p class="section-desc">Isi formulir di bawah ini dan tim admisi kami akan menghubungimu dalam 1×24 jam hari kerja.</p>
+        </div>
+
+        <form id="inquiry-form" style="margin-top:2.25rem;" novalidate>
+          <div class="form-grid">
+            <div class="form-group reveal" style="transition-delay:0.06s;">
+              <label class="form-label" for="nama">Nama Lengkap <span class="req">*</span></label>
+              <input class="form-input" type="text" id="nama" name="nama" placeholder="Nama lengkap kamu" required autocomplete="name" />
+            </div>
+            <div class="form-group reveal" style="transition-delay:0.12s;">
+              <label class="form-label" for="hp">No. HP / WhatsApp <span class="req">*</span></label>
+              <input class="form-input" type="tel" id="hp" name="hp" placeholder="08xx-xxxx-xxxx" required autocomplete="tel" />
+            </div>
+            <div class="form-group reveal" style="transition-delay:0.18s;">
+              <label class="form-label" for="email">Email <span class="req">*</span></label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="email@kamu.com" required autocomplete="email" />
+            </div>
+            <div class="form-group reveal" style="transition-delay:0.24s;">
+              <label class="form-label" for="prodi">Program Studi Pilihan <span class="req">*</span></label>
+              <select class="form-select" id="prodi" name="prodi" required>
+                <option value="" disabled selected>-- Pilih Program Studi --</option>
+                <option value="si">S1 Sistem Informasi</option>
+                <option value="inf">S1 Informatika</option>
+                <option value="rpl">S1 Software Engineering</option>
+                <option value="belum">Belum Memutuskan</option>
+              </select>
+            </div>
+            <div class="form-group reveal" style="transition-delay:0.30s;">
+              <label class="form-label" for="asal">Asal Sekolah</label>
+              <input class="form-input" type="text" id="asal" name="asal" placeholder="SMA/SMK/MA asal" autocomplete="organization" />
+            </div>
+            <div class="form-group reveal" style="transition-delay:0.36s;">
+              <label class="form-label" for="beasiswa">Minat Beasiswa?</label>
+              <select class="form-select" id="beasiswa" name="beasiswa">
+                <option value="" disabled selected>-- Pilih --</option>
+                <option value="ya">Ya, saya tertarik beasiswa</option>
+                <option value="tidak">Tidak / Bayar mandiri</option>
+                <option value="kip">KIP Kuliah</option>
+              </select>
+            </div>
+            <div class="form-group full reveal" style="transition-delay:0.42s;">
+              <label class="form-label" for="pesan">Pertanyaan atau Pesan</label>
+              <textarea class="form-textarea" id="pesan" name="pesan" placeholder="Tulis pertanyaanmu di sini..."></textarea>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:0.48s;">
+            <button type="submit" class="btn-primary">
+              Kirim Pertanyaan
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <p class="form-notice">Dengan mengirim formulir ini kamu menyetujui bahwa data yang diberikan akan digunakan untuk keperluan informasi akademik oleh tim UPITRA. Tidak ada spam.</p>
+          </div>
+          <div class="form-success" id="form-success" role="status">✅ Pesan terkirim! Tim admisi kami akan menghubungimu dalam 1×24 jam hari kerja. Terima kasih!</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-logo-badge">FST</div><div class="nav-logo-text"><strong>UPITRA</strong><span>Sains &amp; Teknologi</span></div></div>
+        <p>Fakultas Sains &amp; Teknologi Universitas Pignatelli Triputra — mencetak inovator teknologi berdampak nyata.</p>
+      </div>
+      <div><div class="footer-col-title">Program Studi</div><nav class="footer-links"><a href="prodi.html#si">S1 Sistem Informasi</a><a href="prodi.html#inf">S1 Informatika</a><a href="prodi.html#rpl">S1 Software Engineering</a></nav></div>
+      <div><div class="footer-col-title">Pendaftaran</div><nav class="footer-links"><a href="#langkah">Cara Daftar</a><a href="#syarat">Persyaratan</a><a href="#biaya">Biaya Kuliah</a><a href="#beasiswa">Beasiswa</a><a href="#faq">FAQ</a></nav></div>
+      <div><div class="footer-col-title">Tautan</div><nav class="footer-links"><a href="index.html">Beranda</a><a href="prodi.html">Program Studi</a><a href="https://pmb.upitra.ac.id/" target="_blank" rel="noopener">PMB Online</a><a href="https://www.upitra.ac.id/" target="_blank" rel="noopener">Website Utama</a></nav></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 FST UPITRA · <a href="https://www.upitra.ac.id/" target="_blank">Universitas Pignatelli Triputra</a> · Surakarta.</p>
+      <div class="footer-badges"><span class="footer-badge">SK 3884/2022</span><span class="footer-badge">Bisa Beasiswa</span><span class="footer-badge">Link &amp; Match</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('active', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    function closeMobile() { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow = ''; }
+    document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobile(); });
+
+    // Scroll reveal
+    const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => ro.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); closeMobile(); }
+      });
+    });
+
+    // Accordion
+    document.querySelectorAll('.accordion-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const body = item.querySelector('.accordion-body');
+        const isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+        body.style.maxHeight = isOpen ? body.scrollHeight + 'px' : '0';
+      });
+    });
+
+    // Form submit simulation
+    document.getElementById('inquiry-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      btn.textContent = 'Mengirim...';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('form-success').style.display = 'block';
+        this.reset();
+        btn.textContent = 'Kirim Pertanyaan';
+        btn.disabled = false;
+        document.getElementById('form-success').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 1400);
+    });
+  </script>
+</body>
+</html>
